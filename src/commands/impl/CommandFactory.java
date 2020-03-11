@@ -4,7 +4,7 @@ import commands.ICommand;
 
 public class CommandFactory {
 
-    private final String getStatus = "?showStatus=true";
+    private final String getStatus = "/?showStatus=true";
 
     public ICommand getCommand(String param) {
         String[] commandParams = param.split(" ");

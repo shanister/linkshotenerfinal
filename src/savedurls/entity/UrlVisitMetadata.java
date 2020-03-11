@@ -94,15 +94,19 @@ public class UrlVisitMetadata {
 
     @Override
     public String toString() {
+        int desktopPercentage = (desktopVisitCount + mobileVisitCount) == 0 ? 0 : (desktopVisitCount / (desktopVisitCount + mobileVisitCount));
+        int mobilePercentage = (desktopVisitCount + mobileVisitCount) == 0 ? 0 : (mobileVisitCount / (desktopVisitCount + mobileVisitCount));
         return "Total Visits: " + totalVisits +
-                ", " + (desktopVisitCount / (desktopVisitCount + mobileVisitCount)) + "% of visits from desktop vs" +
-                ", " + (mobileVisitCount / (desktopVisitCount + mobileVisitCount)) + "% of visits from mobile" +
+                ", " + desktopPercentage + "% of visits from desktop vs" +
+                " " + mobilePercentage + "% of visits from mobile" +
                 ", " + getPercentagePerTypeString(browserTypeCount) +
                 ", " + getPercentagePerTypeString(osTypeCount);
     }
 
     private String getPercentagePerTypeString(HashMap<String, Integer> typeCountMap) {
-        HashMap<String, Integer> percentageByTypeMap = new HashMap<>();
+        if(typeCountMap.isEmpty()) {
+            return "";
+        }
         int sum = typeCountMap.values().stream().mapToInt(val -> val).sum();
 
         String res = "";
