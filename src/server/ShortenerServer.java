@@ -34,8 +34,6 @@ public class ShortenerServer {
                     done = true;
                 }
 
-//                InetAddress address = connectionSocket.getInetAddress();
-//                SocketChannel bla = connectionSocket.getChannel();
                 ICommand command = commandFactory.getCommand(line);
                 String res = command.execute();
                 serverPrintOut.println(res);
